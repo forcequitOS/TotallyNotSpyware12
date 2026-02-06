@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#3249e8">
-  <title>TNS v2 for iOS 12</title>
+  <title>TotallyNotSpyware12</title>
   <link rel="stylesheet" href="style.css"/>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icons/favicon.ico"/>
@@ -13,45 +13,46 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="apple-touch-icon" href="icons/icon-512x512.png">
   <!-- Open Graph Metadata stuff -->
-  <meta property="og:title" content="TotallyNotSpyware v2 for iOS 12">
-  <meta property="og:description" content="Re-jailbreak A7-A10X devices running iOS 12, previously jailbroken with Chimera, all from Safari.">
+  <meta property="og:title" content="TotallyNotSpyware12 Re-Jailbreak">
+  <meta property="og:description" content="Re-jailbreak A7-A10X iOS 12 devices that have been jailbroken with Chimera.">
   <meta property="og:url" content="https://tns12.forcequit.cc/">
-  <meta name="twitter:card" content="TotallyNotSpyware v2 for iOS 12">
-  <meta name="description" content="Re-jailbreak A7-A10X devices running iOS 12, previously jailbroken with Chimera, all from Safari.">
+  <meta name="twitter:card" content="TotallyNotSpyware12 Re-Jailbreak">
+  <meta name="description" content="Re-jailbreak A7-A10X iOS 12 devices that have been jailbroken with Chimera.">
   <!-- Inter font stuff -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <!-- Scripts. Obviously. -->
   <script src="utils.js"></script>
   <script src="int64.js"></script>
   <script src="stages.js"></script>
   <script src="offsets.js"></script>
   <script src="pwn.js"></script>
-  <script src="style.js"></script>
   <script>
   window.addEventListener("DOMContentLoaded", () => {
-    window.animator = new GradientAnimator();
-    window.animator.setTargetSpeed(0);
-    const btn = document.getElementById("jbButton");
+    toggleCredits();
+    toggleTroubleshooting();
     const supported = /iPhone|iPad|iPod/.test(navigator.userAgent) && /OS 12_/.test(navigator.userAgent);
+    const btn = document.getElementById("jbButton");
     if (!supported) {
         btn.textContent = "Unsupported";
         btn.disabled = true;
+    } else {
+        btn.textContent = "Re-Jailbreak!";
+        btn.disabled = false;
     }
-    checkForFallbackGradient();
   });
     function log(msg) {}
     function rejb() {
-    window.animator.setTargetSpeed(1);
       const btn = document.getElementById("jbButton");
       btn.textContent = "Jailbreaking...";
       btn.disabled = true;
       setTimeout(() => {
         btn.textContent = "Failed, retry?";
         btn.disabled = false;
-      }, 6500);
+      }, 150000);
       setTimeout(() => {
-         pwn();
+         //pwn();
       }, 100);
     }
     function toggleCredits() {
@@ -75,69 +76,46 @@
           header.classList.remove("compressed");
       }
     }
-    function checkForFallbackGradient() {
-      const ua = navigator.userAgent;
-
-      const isOldSafari = (() => {
-        const match = ua.match(/Version\/(\d+)\.(\d+)/); // Safari
-        if (match) {
-          const [major, minor] = match.slice(1).map(Number);
-          return major < 12 || (major === 12 && minor < 1);
-        }
-        return false;
-      })();
-
-      const isOldiOS = (() => {
-      const match = ua.match(/OS (\d+)_?(\d+)?/); // iOS
-      if (match) {
-       const [major, minor] = [parseInt(match[1], 10), parseInt(match[2] || "0", 10)];
-       return major < 12 || (major === 12 && minor < 2);
-     }
-     return false;
-    })();
-
-    if (isOldSafari || isOldiOS) {
-       document.documentElement.classList.add("fallback-gradient");
-     }
-    }
   </script>
 </head>
 <body>
   <header>
-    <h1>TotallyNotSpyware v2</h1>
-    <h3>iOS 12.0 – 12.5.7 • A7 - A10X</h3>
-    <h5>Your device must already be jailbroken using Chimera to use TNS v2.</h5>
+    <h1>TotallyNotSpyware12</h1>
+    <h3>iOS 12.0 – 12.5.8 • A7 - A10X</h3>
+    <h5>Your device must already be jailbroken with Chimera to re-jailbreak.</h5>
   </header>
   <div class="center">
   <section class="credits-card" onclick="toggleCredits()">
     <h2>Credits</h2>
-    <ul class="credits-list" id="creditsList">
-      <li>wh1te4ever <span class="role">(main developer)</span></li>
+    <ul class="credits-list expanded" id="creditsList">
+      <li>wh1te4ever <span class="role">(original developer)</span></li>
       <li>alfiecg24 <span class="role">(stable kernel exploit)</span></li>
       <li>felix-pb <span class="role">(kernel exploit)</span></li>
       <li>Samuel Groß <span class="role">(CVE-2020-9802, WebKit exploit)</span></li>
       <li>CoolStar and all Chimera jailbreak developers</li>
       <li>JakeBlair420 and all TotallyNotSpyware developers</li>
       <li>qwertyoruiop <span class="role">(Mach-O loader with +jitMemCpy)</span></li>
-      <li>forcequitOS <span class="role">(site design)</span></li>
+      <li>forcequit <span class="role">(site and user experience improvements)</span></li>
       <li class="note">If any contributors are missing, please let me know.</li>
     </ul>
   </section>
   <section class="credits-card" onclick="toggleTroubleshooting()">
     <h2>Troubleshooting</h2>
-    <ul class="credits-list" id="troubleshootingList">
+    <ul class="credits-list expanded" id="troubleshootingList">
       <li><strong>Manually reloading the web app</strong> • While in the web app, press and hold the Top/Side button until you reach the "slide to power off" screen, then press and hold the Home button until you reach the Home Screen.</li>
       <li><strong>"A problem repeatedly occurred..."</strong> • If you're in Safari and this message appears while you're trying to rejailbreak, reload the page. If you've added the page to your Home Screen, and solely wish to jailbreak from there, see above to reload the web app, or restart your device.</li>
-      <li><strong>Device reboots after "Jailbreaking..." for a few seconds</strong> • Leave your device powered on and unlocked for ~30-60 seconds before retrying again, it'll work eventually.</li>
+      <li><strong>Device reboots to Apple logo after "Jailbreaking..." for a few seconds</strong> • Leave your device powered on and unlocked for ~30-60 seconds before retrying again, it may take multiple attempts to succeed.</li>
       <li><strong>Failed, retry?</strong> • The re-jailbreak is failing for some reason. One possible cause for this can be that your device is already jailbroken. If retrying doesn't help, refresh the website, reload the web app, or restart your device.</li>
       <li><strong>Device doesn't reflect updates to site</strong> • If you're using the web app, see earlier instructions to manually reload the web app, and/or reboot your device. If you're not, I probably didn't update the AppCache manifest. Go to Settings > Safari > Clear History and Website Data and it'll get new data from the server.</li>
+      <li><strong>Unable to remove problematic tweaks</strong> • If you can't remove any tweaks due to your device crashing when trying to reboot to a jailbroken state, you can disable tweak injection temporarily by setting the NVRAM <code>boot-args</code> variable to <code>-safe-mode</code> using either an SSH RAM disk, or the <code>irecovery</code> command line tool on a computer, with your device connected in Recovery mode. Please visit the GitHub page for further instructions.</li>
+      <li><strong>JavaScript Disabled</strong> • Go to Settings > Safari > Advanced, and toggle JavaScript on. If you're using a 3rd party web browser, check your browser's settings to enable JavaScript, or use the Safari instead.</li>
       <li class="note">If you have a problem not mentioned here, please file a GitHub issue.</li>
     </ul>
   </section>
-  <a href="https://github.com/forcequitOS/tns-v2-newUI" target="_blank" rel="noopener noreferrer">Source Code</a>
+  <a href="https://github.com/forcequitOS/TotallyNotSpyware12" target="_blank" rel="noopener noreferrer">Source Code</a>
   <a href="https://github.com/wh1te4ever/totally-not-spyware-v2-release" target="_blank" rel="noopener noreferrer">Original Source Code</a>
   <main class="action">
-    <button id="jbButton" onclick="rejb()">Re-Jailbreak!</button>
+    <button id="jbButton" onclick="rejb()" disabled>JavaScript Disabled</button>
   </main>
   </div>
   <sub>This is an unofficial modification, use at your own risk.</sub>

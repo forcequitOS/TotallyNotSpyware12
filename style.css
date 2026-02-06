@@ -1,16 +1,14 @@
 :root {
   --main-background-1: #f86e01;
   --main-background-2: #fc010c;
-  --main-background-3: #105cff;
-  --main-background-4: #00eb2e;
-  --main-background-5: #fb38b0;
+  --main-background-3: #fb38b0;
+  --main-background-4: #34eb59;
+  --main-background-5: #105cff;
   --main-background-6: #5f1fbf;
   --text-primary: rgba(255, 255, 255, 1.0);
   --text-secondary: rgba(255, 255, 255, 0.8);
   --text-tertiary: rgba(255, 255, 255, 0.6);
   --gradient-rotation: 0deg;
-  --gradient-translate-x: -70%;
-  --gradient-translate-y: -70%;
 }
 
 body {
@@ -34,47 +32,27 @@ body::before {
   position: fixed;
   top: 0;
   left: 0;
-  width: 800%;
-  height: 800%;
+  width: 100%;
+  height: 100%;
   z-index: -1;
-  transform: translate(var(--gradient-translate-x), var(--gradient-translate-y));
-  background: conic-gradient(
-    from var(--gradient-rotation) at center,
-    var(--main-background-1),
-    var(--main-background-2),
-    var(--main-background-3),
-    var(--main-background-4),
-    var(--main-background-5),
-    var(--main-background-6),
-    var(--main-background-1)
-  );
-}
-
-body.js-gradient::before {
-  background: conic-gradient(
-    from var(--gradient-rotation) at center,
-    var(--main-background-1),
-    var(--main-background-2),
-    var(--main-background-3),
-    var(--main-background-4),
-    var(--main-background-5),
-    var(--main-background-6),
-    var(--main-background-1)
-  );
-}
-
-html.fallback-gradient body::before {
   background: linear-gradient(
     calc(45deg + var(--gradient-rotation)),
-    var(--main-background-1),
-    var(--main-background-2),
-    var(--main-background-3),
+    var(--main-background-4),
     var(--main-background-4),
     var(--main-background-5),
-    var(--main-background-6),
-    var(--main-background-1)
+    var(--main-background-3)
   );
   background-size: 400% 400%;
+  animation: gradientAnimation 15s linear infinite alternate;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
 }
 
 h1 {
